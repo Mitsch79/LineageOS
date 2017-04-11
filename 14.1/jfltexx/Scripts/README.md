@@ -63,11 +63,7 @@ the recovery.
 Now it's time for building the recovery image.
 
 ##### Note: 
-You might want to change the line `make -j9 recoveryimage` to the number of processors/threads your
-machine has. By default it's set to -j9 (8 threads plus 1). So if you have only 4 threads you might use -j5 and
-if you only have 2 threads set it to -j3.
-Using more threads than your machine can really run in parallel will simply result in slightly increased build times
-since your operating systems scheduler will consume some additional time to switch between the threads.
+The script autodetects the number of available processors and compiles using all of them.
 
 ---
 ## setup_twrp_build_environment.sh
@@ -96,11 +92,7 @@ The script will repo sync your files, remove any remains of a previous build
 and start a new build.
 
 ##### Note: 
-You might want to change the line `make -j9 recoveryimage` to the number of processors/threads your
-machine has. By default it's set to -j9 (8 threads plus 1). So if you have only 4 threads you might use -j5 and
-if you only have 2 threads set it to -j3.
-Using more threads than your machine can really run in parallel will simply result in slightly increased build times
-since your operating systems scheduler will consume some additional time to switch between the threads.
+The script autodetects the number of available processors and compiles using all of them.
 
 ---
 ## setup_build_environment.sh
