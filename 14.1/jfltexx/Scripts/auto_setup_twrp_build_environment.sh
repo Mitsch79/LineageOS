@@ -114,8 +114,10 @@ prebuilts/misc/linux-x86/ccache/ccache -M 50G
 
 make clean && make installclean && make clobber
 
-options="-j 9"
-make "${options[@]}" recoveryimage
+CPU_COUNT=$(grep -c ^processor /proc/cpuinfo)
+let "CPU_COUNT++"
+OPTIONS="-j $CPU_COUNT"
+make "${OPTIONS[@]}" recoveryimage
 
 cd $WORK_DIR/out/target/product/jfltexx || echo read -p "Wechsel in das Verzeichnis $WORK_DIR nicht möglich. Abbruch." exit
 tar -H ustar -c recovery.img > recovery.tar
