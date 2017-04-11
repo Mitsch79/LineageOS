@@ -1,2 +1,2 @@
 # LineageOS
-Scripts and Tools
+LineageOS Tools and Scripts 
