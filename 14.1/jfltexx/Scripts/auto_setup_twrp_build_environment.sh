@@ -9,25 +9,32 @@ echo -e "${RED}"
 echo "Hinweis: Das Script ist gedacht für Ubuntu 16.04, jfltexx und LOS 14.1"
 echo -e "${NC}"
 
-echo "Zuerst brauche wir ein paar grundlegende Infos von dir. OK? Na dann..."
-read -p 'Deine Email für Git: [name@domain.net] ' DEINE_MAIL
-DEINE_MAIL="${DEINE_MAIL:=name@domain.net}"
-read -p 'Dein Name für Git: [Vorname Nachname]' DEIN_NAME
-DEIN_NAME="${DEIN_NAME:=Vorname Nachname}"
-read -p 'Welches Arbeitsverzeichnis willst du?: [~/android/recovery-twrp]' WORK_DIR
-WORK_DIR=${WORK_DIR:=~/android/recovery-twrp}
-
 echo "Holen der benötigten Pakete"
 sudo apt update
 sudo apt install git repo curl build-essential openjdk-8-jdk m4 bison bc flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline6-dev lib32z1-dev libesd0-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
 
-echo "Mit Git bekannt machen"
-git config --global user.name "$DEIN_NAME"
-git config --global user.email "$DEINE_MAIL"
+clear
+echo "Zuerst brauchen wir ein paar grundlegende Infos von dir. OK? Na dann..."
+read -p 'Welches Arbeitsverzeichnis willst du?: [~/android/recovery-twrp]' WORK_DIR
+WORK_DIR=${WORK_DIR:=~/android/recovery-twrp}
 
-echo "Arbeitsverzeichnis anlegen"
+if [ -z "$(grep -E 'name = |email = .+\@.+\..{2,3}' ~/.gitconfig)" ]; then
+	read -p 'Deine Email für Git: [name@domain.net] ' DEINE_MAIL
+	DEINE_MAIL="${DEINE_MAIL:=name@domain.net}"
+	read -p 'Dein Name für Git: [Vorname Nachname]' DEIN_NAME
+	DEIN_NAME="${DEIN_NAME:=Vorname Nachname}"
+	echo "Mit Git bekannt machen"
+	git config --global user.name "$DEIN_NAME"	
+	git config --global user.email "$DEINE_MAIL"
+else
+	echo "Bereits mit Git bekannt gemacht."
+fi;
+
 if [ ! -d "$WORK_DIR" ]; then
-  mkdir -p $WORK_DIR
+	echo "Arbeitsverzeichnis anlegen."
+	mkdir -p $WORK_DIR || echo read -p "Anlegen des Arbeitsverzeichnisses $WORK_DIR nicht möglich. Abbruch." exit
+else 
+	echo "Arbeitsverzeichnis bereits vorhanden."
 fi;
 
 cd $WORK_DIR || echo read -p "Wechsel in das Verzeichnis $WORK_DIR nicht möglich. Abbruch." exit
@@ -123,5 +130,14 @@ cd $WORK_DIR/out/target/product/jfltexx || echo read -p "Wechsel in das Verzeich
 tar -H ustar -c recovery.img > recovery.tar
 md5sum -t recovery.tar >> recovery.tar
 mv recovery.tar recovery.tar.md5
+
+echo
+echo "Das Recovery-Image befindet sich unter" 
+echo "$WORK_DIR/out/target/product/jfltexx/recovery.img"
+echo
+echo "Das mit Odin flashbare Recovery-Image befindet sich unter"
+echo "$WORK_DIR/out/target/product/jfltexx/recovery.tar.md5"
+echo
+echo "Fertig"
 
 cd $WORK_DIR || echo read -p "Wechsel in das Verzeichnis $WORK_DIR nicht möglich. Abbruch." exit
