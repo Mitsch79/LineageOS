@@ -5,9 +5,9 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 HOME=~
 cd ~ || echo read -p "Wechsel in das Verzeichnis $HOME nicht möglich. Abbruch." exit
-echo -e ${RED}
+echo -e "${RED}"
 echo "Hinweis: Das Script ist gedacht für Ubuntu 16.04, jfltexx und LOS 14.1"
-echo -e ${NC}
+echo -e "${NC}"
 
 echo "Zuerst brauche wir ein paar grundlegende Infos von dir. OK? Na dann..."
 read -p 'Deine Email für Git: [name@domain.net] ' DEINE_MAIL
@@ -22,8 +22,8 @@ sudo apt update
 sudo apt install git repo curl build-essential openjdk-8-jdk m4 bison bc flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline6-dev lib32z1-dev libesd0-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
 
 echo "Mit Git bekannt machen"
-git config --global user.name $DEIN_NAME
-git config --global user.email $DEINE_MAIL
+git config --global user.name "$DEIN_NAME"
+git config --global user.email "$DEINE_MAIL"
 
 echo "Arbeitsverzeichnis anlegen"
 if [ ! -d "$WORK_DIR" ]; then
