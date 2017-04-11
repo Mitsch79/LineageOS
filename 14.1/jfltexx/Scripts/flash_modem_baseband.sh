@@ -58,7 +58,7 @@ fi
 #das Phone himmelt
 if [ ! -d $HEIMDALL_WORKDIR ]; then
   echo "Erstelle Arbeitsberzeichnis"
-  mkdir $HEIMDALL_WORKDIR
+  mkdir $HEIMDALL_WORKDIR || read -p "Arbeitsverzeichnis $HEIMDALL_WORKDIR konnte nicht angelegt werden" exit
 else
   echo "Säubere Arbeitsverzeichnis"
   rm -r $HEIMDALL_WORKDIR/*
