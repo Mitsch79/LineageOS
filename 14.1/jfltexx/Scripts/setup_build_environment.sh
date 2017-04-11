@@ -1,3 +1,5 @@
+#!/bin/bash
+
 clear
 cd ~
 echo "Hinweis: Das Script ist gedacht für Ubuntu 16.04"
