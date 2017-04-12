@@ -17,6 +17,8 @@ clear
 echo "Zuerst brauchen wir ein paar grundlegende Infos von dir. OK? Na dann..."
 read -p 'Welches Arbeitsverzeichnis willst du?: [~/android/recovery-twrp]' WORK_DIR
 WORK_DIR=${WORK_DIR:=~/android/recovery-twrp}
+WORK_DIR=${WORK_DIR/#"~"/"$HOME"}
+
 
 if [ -z "$(grep -E 'name = |email = .+\@.+\..{2,3}' ~/.gitconfig)" ]; then
 	read -p 'Deine Email für Git: [name@domain.net] ' DEINE_MAIL

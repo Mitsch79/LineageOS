@@ -17,6 +17,7 @@ clear
 echo "Zuerst brauchen wir ein paar grundlegende Infos von dir. OK? Na dann..."
 read -p 'Welches Arbeitsverzeichnis willst du?: [~/android/recovery-twrp]' WORK_DIR
 WORK_DIR=${WORK_DIR:=~/android/recovery-twrp}
+WORK_DIR=${WORK_DIR/#"~"/"$HOME"}
 
 if [ -z "$(grep -E 'name = |email = .+\@.+\..{2,3}' ~/.gitconfig)" ]; then
 	read -p 'Deine Email für Git: [name@domain.net] ' DEINE_MAIL
@@ -126,7 +127,7 @@ let "CPU_COUNT++"
 OPTIONS="-j $CPU_COUNT"
 make "${OPTIONS[@]}" recoveryimage
 
-cd $WORK_DIR/out/target/product/jfltexx || echo read -p "Wechsel in das Verzeichnis $WORK_DIR nicht möglich. Abbruch." exit
+cd $WORK_DIR/out/target/product/jfltexx || echo read -p "Wechsel in das Verzeichnis $WORK_DIR/out/target/product/jfltexx nicht möglich. "Abbruch." exit
 tar -H ustar -c recovery.img > recovery.tar
 md5sum -t recovery.tar >> recovery.tar
 mv recovery.tar recovery.tar.md5
