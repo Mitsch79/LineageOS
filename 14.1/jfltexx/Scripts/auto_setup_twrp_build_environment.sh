@@ -115,8 +115,8 @@ else
     echo "Eintrag für twrp.fstab in BoardConfig.mk vorhanden. Weiter."
 fi;
 
-clear "Hole https://gerrit.omnirom.org 22768 22769 22770"
-repopick -P bootable/recovery -g https://gerrit.omnirom.org 22768 22769 22770
+#clear "Hole https://gerrit.omnirom.org 23635"
+#repopick -P bootable/recovery -g https://gerrit.omnirom.org 23635
 
 clear
 echo "Nun geht es los"

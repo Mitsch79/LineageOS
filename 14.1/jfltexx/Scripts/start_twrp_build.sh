@@ -12,8 +12,8 @@ repo sync
 . build/envsetup.sh
 lunch lineage_jfltexx-userdebug
 
-clear "Hole https://gerrit.omnirom.org 22768 22769 22770"
-repopick -P bootable/recovery -g https://gerrit.omnirom.org 22768 22769 22770
+#clear "Hole https://gerrit.omnirom.org 23635"
+#repopick -P bootable/recovery -g https://gerrit.omnirom.org 23635
 
 export USE_CCACHE=1
 
